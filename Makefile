@@ -6,7 +6,7 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/19 13:15:58 by adebray           #+#    #+#              #
-#    Updated: 2016/02/19 14:16:10 by adebray          ###   ########.fr        #
+#    Updated: 2016/02/19 23:07:55 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,11 @@ SRC += main.c
 OBJ = $(subst .c,.o, $(SRC))
 
 export CC = clang
-export CFLAGS = -Iinc -Wall -Werror -Wextra -pedantic
+export CFLAGS = -Iinc -Wall -Werror -Wextra -pedantic -g3
 
 LDLIBS = -Llibft -lft -Lprintf -lftprintf
 
 all: libft printf $(NAME)
-	echo $(OBJ)
 
 $(NAME): $(OBJ)
 	mkdir -p bin

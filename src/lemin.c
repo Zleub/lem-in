@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 17:51:37 by adebray           #+#    #+#             */
-/*   Updated: 2016/02/19 19:09:36 by adebray          ###   ########.fr       */
+/*   Updated: 2016/02/19 23:56:25 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,22 +97,22 @@ struct s_room	*get_room(struct s_lem_in *lemin, char *name)
 	return (0);
 }
 
-struct s_room	*get_container(struct s_lem_in *lemin, char *name)
-{
-	struct s_room	*r;
-	struct s_link	*l;
+// struct s_room	*get_container(struct s_lem_in *lemin, char *name)
+// {
+// 	struct s_room	*r;
+// 	struct s_link	*l;
 
-	r = lemin->room;
-	while (r)
-	{
-		l = r->link;
-		while (l)
-		{
-			if (!ft_strcmp(l->room->name, name))
-				return (r);
-			l = l->next;
-		}
-		r = r->next;
-	}
-	return (0);
-}
+// 	r = lemin->room;
+// 	while (r)
+// 	{
+// 		l = r->link;
+// 		while (l)
+// 		{
+// 			if (!ft_strcmp(l->room->name, name))
+// 				return (r);
+// 			l = l->next;
+// 		}
+// 		r = r->next;
+// 	}
+// 	return (0);
+// }

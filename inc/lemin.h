@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 17:49:42 by adebray           #+#    #+#             */
-/*   Updated: 2016/02/19 19:32:07 by adebray          ###   ########.fr       */
+/*   Updated: 2016/02/19 23:28:42 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ struct s_room
 	{
 		struct s_room	*room;
 		struct s_link	*next;
-
 	}				*link;
 };
 
@@ -57,5 +56,6 @@ int				consume_tube(char *line, struct s_lem_in *lemin, int *state);
 
 struct s_room	*get_room(struct s_lem_in *lemin, char *name);
 struct s_room	*get_container(struct s_lem_in *lemin, char *name);
+void			free_array(char **array);
 
 #endif
