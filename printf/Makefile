@@ -6,7 +6,7 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/23 04:54:36 by adebray           #+#    #+#              #
-#    Updated: 2016/02/19 14:15:38 by adebray          ###   ########.fr        #
+#    Updated: 2016/02/21 16:04:52 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ $(NAME): $(OBJ)
 	ranlib $@
 
 %.o: %.c
-	$(CC) $(CCFLAGS) $(HEADFLAG) -o $@ -c $<
+	$(CC) $(CFLAGS) $(HEADFLAG) -o $@ -c $<
 
 clean:
 	rm -f $(OBJ)

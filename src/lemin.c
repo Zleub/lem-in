@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 17:51:37 by adebray           #+#    #+#             */
-/*   Updated: 2016/02/19 23:56:25 by adebray          ###   ########.fr       */
+/*   Updated: 2016/02/21 16:08:58 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void			room_push_room(struct s_room *room1, struct s_room *room2)
 {
 	struct s_link *l;
 
+	ft_printf("%s <-> %s\n", room1->name, room2->name);
 	l = room1->link;
 	if (!room1->link)
 		room1->link = alloc_tube(room2);

@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 13:25:15 by adebray           #+#    #+#             */
-/*   Updated: 2016/02/20 00:12:00 by adebray          ###   ########.fr       */
+/*   Updated: 2016/02/21 16:42:49 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		get_data(struct s_lem_in *lemin)
 	state = NBR;
 	while(get_next_line(0, &line) > 0)
 	{
+		ft_printf("-> %s\n", line);
 		if (line[0] == '#' && line[1] != '#')
 			(void)state;
 		else
@@ -97,15 +98,23 @@ struct s_room	*get_container(struct s_lem_in *lemin, char *name)
 		while (l)
 		{
 			s = stack;
-			while (s)
-			{
-				// ft_printf("s->name: %s, %s, %s\n", l->room->name, s->name, name);
-				if (ft_strcmp(s->name, l->room->name) && !ft_strcmp(l->room->name, name))
-					return (r);
-				s = s->next;
+			if (s) {
+				while (s)
+				{
+					ft_printf("%s: %s, %s, %s\n", name, r->name, l->room->name, s->name);
+					if (!ft_strcmp(l->room->name, name) && ft_strcmp(r->name, s->name) && !ft_strcmp(l->room->name, s->name))
+					{
+						ft_printf(": %s, %s, %s\n", l->room->name, s->name, name);
+						return (r);
+					}
+					s = s->next;
+				}
 			}
-			if ((!s) && !ft_strcmp(l->room->name, name))
+			else if (!ft_strcmp(l->room->name, name))
+			{
+				ft_printf("no stack\n");
 				return (r);
+			}
 			l = l->next;
 		}
 		r = r->next;
@@ -115,6 +124,7 @@ struct s_room	*get_container(struct s_lem_in *lemin, char *name)
 
 int		resolve(struct s_lem_in *lemin, char *name)
 {
+	ft_printf("from %s\n", name);
 	struct s_room *r = get_container(lemin, name);
 	// if (!r) {
 	// 	// pop_stack();
@@ -142,6 +152,7 @@ int		main(void)
 		return (0);
 	}
 	push_stack(lemin.end->name);
+	ft_printf("resolve\n");
 	resolve(&lemin, lemin.end->name);
 	return (0);
 }

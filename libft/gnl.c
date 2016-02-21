@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/13 22:21:30 by tcharlat          #+#    #+#             */
-/*   Updated: 2015/01/19 18:57:54 by adebray          ###   ########.fr       */
+/*   Updated: 2016/02/21 16:16:25 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static char	*ft_strcatloc(char *str1, char *str2)
 	return (array[0]);
 }
 
+#include <stdio.h>
+
 int			get_next_line(int fd, char **line)
 {
 	int		ret;
@@ -49,5 +51,8 @@ int			get_next_line(int fd, char **line)
 		else
 			*line = ft_strcatloc(*line, tmp);
 	}
-	return (ret);
+	if (ret == 0 && *line == NULL)
+		return (0);
+	else
+		return (1);
 }
