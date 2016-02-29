@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 13:25:15 by adebray           #+#    #+#             */
-/*   Updated: 2016/02/21 16:42:49 by adebray          ###   ########.fr       */
+/*   Updated: 2016/02/29 11:36:47 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,43 +46,6 @@ int		get_data(struct s_lem_in *lemin)
 	ft_printf("end %s\n", lemin->end->name);
 	print_room(lemin->room);
 	return (1);
-}
-
-struct s_stack
-{
-	char			*name;
-	struct s_stack	*next;
-};
-
-struct s_stack *stack = NULL;
-
-struct s_stack *allocat_stack(char *name)
-{
-	struct s_stack *s;
-
-	s = (struct s_stack *)malloc(sizeof(struct s_stack));
-	ft_bzero(s, sizeof(struct s_stack));
-	s->name = name;
-	return (s);
-}
-
-void push_stack(char *name)
-{
-	struct s_stack *s;
-
-	if (!stack)
-		stack = allocat_stack(name);
-	else
-	{
-		s = allocat_stack(name);
-		s->next = stack;
-		stack = s;
-	}
-}
-
-void pop_stack()
-{
-	stack = stack->next;
 }
 
 struct s_room	*get_container(struct s_lem_in *lemin, char *name)
