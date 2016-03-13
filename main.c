@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 13:25:15 by adebray           #+#    #+#             */
-/*   Updated: 2016/02/29 11:36:47 by adebray          ###   ########.fr       */
+/*   Updated: 2016/03/13 14:38:05 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		get_data(struct s_lem_in *lemin)
 	state = NBR;
 	while(get_next_line(0, &line) > 0)
 	{
-		ft_printf("-> %s\n", line);
+		// ft_printf("-> %s\n", line);
 		if (line[0] == '#' && line[1] != '#')
 			(void)state;
 		else
@@ -41,18 +41,19 @@ int		get_data(struct s_lem_in *lemin)
 	if (!lemin->nbr || !lemin->start || !lemin->end)
 		return (0);
 
-	ft_printf("%d\n", lemin->nbr);
-	ft_printf("start %s\n", lemin->start->name);
-	ft_printf("end %s\n", lemin->end->name);
+	// ft_printf("%d\n", lemin->nbr);
+	// ft_printf("start %s\n", lemin->start->name);
+	// ft_printf("end %s\n", lemin->end->name);
 	print_room(lemin->room);
 	return (1);
 }
+
+struct s_stack *stack = NULL;
 
 struct s_room	*get_container(struct s_lem_in *lemin, char *name)
 {
 	struct s_room	*r;
 	struct s_link	*l;
-	struct s_stack	*s;
 
 	r = lemin->room;
 	while (r)
@@ -60,24 +61,9 @@ struct s_room	*get_container(struct s_lem_in *lemin, char *name)
 		l = r->link;
 		while (l)
 		{
-			s = stack;
-			if (s) {
-				while (s)
-				{
-					ft_printf("%s: %s, %s, %s\n", name, r->name, l->room->name, s->name);
-					if (!ft_strcmp(l->room->name, name) && ft_strcmp(r->name, s->name) && !ft_strcmp(l->room->name, s->name))
-					{
-						ft_printf(": %s, %s, %s\n", l->room->name, s->name, name);
-						return (r);
-					}
-					s = s->next;
-				}
-			}
-			else if (!ft_strcmp(l->room->name, name))
-			{
-				ft_printf("no stack\n");
+			// ft_printf("%s -> %s, %s\n", name, r->name, l->room->name);
+			if ( !ft_strcmp(name, l->room->name) && !is_in_stack(stack, r->name) )
 				return (r);
-			}
 			l = l->next;
 		}
 		r = r->next;
@@ -88,17 +74,22 @@ struct s_room	*get_container(struct s_lem_in *lemin, char *name)
 int		resolve(struct s_lem_in *lemin, char *name)
 {
 	ft_printf("from %s\n", name);
+	print_stack(stack);
+
 	struct s_room *r = get_container(lemin, name);
-	// if (!r) {
-	// 	// pop_stack();
-	// 	return (0);
-	// }
+	if (!r) {
+		// ft_printf("no r\n");
+		pop_stack();
+		return (0);
+	}
 
 	char *tmp = r->name;
 
-	ft_printf("-- %s\n", tmp);
-	if (!(ft_strcmp(tmp, lemin->start->name)))
+	ft_printf("-- %s\n", r->link->room->name);
+	if (!(ft_strcmp(tmp, lemin->end->name))) {
+		ft_printf("clean exit\n");
 		return (1);
+	}
 	push_stack(tmp);
 	resolve(lemin, tmp);
 	return (0);
@@ -114,8 +105,10 @@ int		main(void)
 		ft_printf("Error\n");
 		return (0);
 	}
+	push_stack(lemin.start->name);
+	resolve(&lemin, lemin.start->name);
 	push_stack(lemin.end->name);
-	ft_printf("resolve\n");
-	resolve(&lemin, lemin.end->name);
+	ft_printf("--------------\n");
+	print_stack(stack);
 	return (0);
 }
