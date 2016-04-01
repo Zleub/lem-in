@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 17:49:42 by adebray           #+#    #+#             */
-/*   Updated: 2016/03/13 14:17:31 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/01 14:16:25 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ struct s_room	*get_room(struct s_lem_in *lemin, char *name);
 struct s_room	*get_container(struct s_lem_in *lemin, char *name);
 void			free_array(char **array);
 
-struct s_stack *make_stack(char *name);
-void push_stack(char *name);
-void pop_stack();
-void print_stack(struct s_stack *s);
-int is_in_stack(struct s_stack *s, char *name);
+struct s_stack	*make_stack(char *name);
+void			push_stack(char *name);
+void			pop_stack();
+void			print_stack(struct s_stack *s);
+int				is_in_stack(struct s_stack *s, char *name);
 
 
 #endif

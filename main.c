@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 13:25:15 by adebray           #+#    #+#             */
-/*   Updated: 2016/03/13 14:38:05 by adebray          ###   ########.fr       */
+/*   Updated: 2016/04/01 13:37:01 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int		main(void)
 		ft_printf("Error\n");
 		return (0);
 	}
+
 	push_stack(lemin.start->name);
 	resolve(&lemin, lemin.start->name);
 	push_stack(lemin.end->name);

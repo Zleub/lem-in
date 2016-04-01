@@ -6,13 +6,16 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/19 11:21:22 by adebray           #+#    #+#              #
-#    Updated: 2016/02/19 17:57:33 by adebray          ###   ########.fr        #
+#    Updated: 2016/04/01 13:47:47 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libft.a
 LIB			=	ft
-HEADDIR		=	 ../inc
+
+HEADDIR		?= inc
+CC			?= gcc
+CFLAGS		?= -Werror -Wall -Wextra -Wuninitialized -O3
 
 SRC			=	arraylen.c \
 				ft_memset.c \
@@ -78,24 +81,22 @@ SRC			=	arraylen.c \
 
 OBJ			= $(subst .c,.o,$(SRC))
 
-CC			?= gcc
-CFLAGS		?= -Werror -Wall -Wextra -Wuninitialized -O3
-
 all: $(NAME)
 
-$(NAME):	$(OBJ)
-			ar rc $@ $^
-			ranlib $@
+$(NAME): $(OBJ)
+	ar rc $@ $^
+	ranlib $@
 
-%.o:		%.c
-			$(CC) $(CFLAGS) -I $(HEADDIR) -o $@ -c $<
+%.o: %.c
+	$(CC) $(CFLAGS) -I $(HEADDIR) -o $@ -c $<
 
 clean:
-			rm -f $(OBJ)
+	rm -f $(OBJ)
 
-fclean:		clean
-			rm -f $(NAME)
+fclean:
+	rm -f $(OBJ)
+	rm -f $(NAME)
 
-re:			fclean all
+re:	fclean all
 
 .PHONY: all clean fclean re

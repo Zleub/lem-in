@@ -6,7 +6,7 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/19 13:15:58 by adebray           #+#    #+#              #
-#    Updated: 2016/02/19 23:07:55 by adebray          ###   ########.fr        #
+#    Updated: 2016/04/01 17:53:06 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ SRC = $(shell find ./src -name '*\.c')
 SRC += main.c
 OBJ = $(subst .c,.o, $(SRC))
 
+export HEADDIR = $(PWD)/inc
 export CC = clang
-export CFLAGS = -Iinc -Wall -Werror -Wextra -pedantic -g3
+export CFLAGS = -I$(HEADDIR) -Wall -Werror -Wextra -g3
 
 LDLIBS = -Llibft -lft -Lprintf -lftprintf
 

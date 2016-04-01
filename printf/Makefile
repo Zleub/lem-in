@@ -6,12 +6,16 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/23 04:54:36 by adebray           #+#    #+#              #
-#    Updated: 2016/02/21 16:04:52 by adebray          ###   ########.fr        #
+#    Updated: 2016/04/01 13:42:04 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-HEADDIR = ../inc
+
+HEADDIR ?= inc
+CC ?= gcc
+CFLAGS ?= -Werror -Wall -Wextra -Wuninitialized -O3
+HEADFLAG = -I $(HEADDIR)
 
 SRC =	ft_atoi.c \
 		ft_isdigit.c \
@@ -28,9 +32,6 @@ SRC =	ft_atoi.c \
 
 OBJ = $(subst .c,.o,$(SRC))
 
-CC ?= gcc
-CFLAGS ?= -Werror -Wall -Wextra -Wuninitialized -O3
-HEADFLAG = -I $(HEADDIR)
 
 .PHONY: all clean fclean re
 
