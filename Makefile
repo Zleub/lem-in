@@ -1,50 +1,30 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/02/19 13:15:58 by adebray           #+#    #+#              #
-#    Updated: 2016/02/19 23:07:55 by adebray          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = lem-in
 
-NAME = bin/lem-in
-SRC = $(shell find ./src -name '*\.c')
-SRC += main.c
+SRC = $(shell find ./src -name '*.c')
 OBJ = $(subst .c,.o, $(SRC))
 
-export CC = clang
-export CFLAGS = -Iinc -Wall -Werror -Wextra -pedantic -g3
+CC = clang
+CFLAGS = -Wall -Werror -Wextra -I inc
+LDFLAGS = -L c-libs/ft_printf -l ftprintf -L c-libs/libft -l ft
 
-LDLIBS = -Llibft -lft -Lprintf -lftprintf
-
-all: libft printf $(NAME)
+all: libft ft_printf $(NAME)
 
 $(NAME): $(OBJ)
-	mkdir -p bin
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	$(CC) $(LDFLAGS) -o $@ $(OBJ)
+
+ft_printf:
+	make -C c-libs/ft_printf
 
 libft:
-	make -C libft
-
-printf:
-	make -C printf
-
-re:
-	make fclean
-	make all
+	make -C c-libs/libft
 
 clean:
-	make -C libft clean
-	make -C printf clean
 	rm -rf $(OBJ)
 
 fclean:
-	make -C libft fclean
-	make -C printf fclean
 	rm -rf $(OBJ)
 	rm -rf $(NAME)
 
-.PHONY: all $(NAME) re clean fclean libft printf
+re: fclean all
+
+.PHONY: ft_printf all clean fclean re libft
